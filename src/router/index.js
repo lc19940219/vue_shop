@@ -6,7 +6,10 @@ import Order from '../pages/Order/Order.vue'
 import Profile from '../pages/Profile/Profile.vue'
 
 Vue.use(Router)
-
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => err)
+}
 export default new Router({
   routes: [{
       path: '/',

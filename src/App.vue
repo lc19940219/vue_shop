@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import FootGuider from 'components/FooterGuider/FootGuider.vue'
+  import FootGuider from './components/FooterGuider/FootGuider.vue'
 export default {
  components:{
    FootGuider
