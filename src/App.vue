@@ -11,7 +11,10 @@
 export default {
  components:{
    FootGuider
- }
+ },
+created() {
+   this.$store.dispatch("getAddress")
+}
 }
 </script>
 
