@@ -1,7 +1,7 @@
 <template>
    <div class="msite">
           <!--首页头部-->
-          <HeaderTop title="xxxxxxx">
+          <HeaderTop title="aaaaaxx">
             <router-link class="header_search" slot="search" to="/search">
               <i class="iconfont icon-sousuo"></i>
             </router-link>
