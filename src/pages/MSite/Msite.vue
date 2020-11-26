@@ -11,112 +11,23 @@
           </HeaderTop>
           <!--首页导航-->
           <nav class="msite_nav">
-            <div class="swiper-container">
+            <div class="swiper-container" v-if="categorysArr.length>0" >
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <a href="javascript:" class="link_to_food">
+                <div class="swiper-slide"  v-for="(cs,index) in categorysArr" :key="index">
+                  <a href="javascript:" class="link_to_food" v-for="(c,index2) in cs" :key="index2">
                     <div class="food_container">
-                      <img src="./images/nav/1.jpg">
+                      <img :src="imgBaseUrl+c.image_url">
                     </div>
-                    <span>甜品饮品</span>
+                    <span>{{ c.title }}</span>
                   </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/2.jpg">
-                    </div>
-                    <span>商超便利</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/3.jpg">
-                    </div>
-                    <span>美食</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/4.jpg">
-                    </div>
-                    <span>简餐</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/5.jpg">
-                    </div>
-                    <span>新店特惠</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/6.jpg">
-                    </div>
-                    <span>准时达</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/7.jpg">
-                    </div>
-                    <span>预订早餐</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/8.jpg">
-                    </div>
-                    <span>土豪推荐</span>
-                  </a>
+
                 </div>
-                <div class="swiper-slide">
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/9.jpg">
-                    </div>
-                    <span>甜品饮品1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/10.jpg">
-                    </div>
-                    <span>商超便利1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/11.jpg">
-                    </div>
-                    <span>美食1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/12.jpg">
-                    </div>
-                    <span>简餐1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/13.jpg">
-                    </div>
-                    <span>新店特惠1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/14.jpg">
-                    </div>
-                    <span>准时达1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/1.jpg">
-                    </div>
-                    <span>预订早餐1</span>
-                  </a>
-                  <a href="javascript:" class="link_to_food">
-                    <div class="food_container">
-                      <img src="./images/nav/2.jpg">
-                    </div>
-                    <span>土豪推荐1</span>
-                  </a>
-                </div>
+
               </div>
               <!-- Add Pagination -->
               <div class="swiper-pagination"></div>
             </div>
+            <img src="./images/msite_back.svg" v-else>
           </nav>
           <!--首页附近商家-->
           <div class="msite_shop_list">
@@ -136,20 +47,58 @@ import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
 import ShopList from '../../components/ShopList/ShopList.vue'
-  export default {
-mounted() {
-new Swiper('.swiper-container', {
-pagination: {
-el: '.swiper-pagination',
-},
-loop: true
-})
-},
-components:{
-  HeaderTop,
-  ShopList
-}
+import {mapState} from 'vuex'
+
+export default {
+  mounted() {
+      this.$store.dispatch("getCategorys")
+    this.$store.dispatch("getShops")
+  },
+  components: {
+    HeaderTop,
+    ShopList
+  },
+  computed: {
+    ...mapState(['address', 'categorys']),
+
+    categorysArr() {
+      const max = 8
+      const arr = []
+      const {categorys} = this
+      let smallArr = []
+
+      categorys.forEach((category,index) => {
+        if (smallArr.length === 0) {
+          arr.push(smallArr)
+        }
+        smallArr.push(category)
+        if (smallArr.length === max) {
+          smallArr = []
+        }
+
+      })
+      return arr
+    }
+  },
+ data(){
+    return {
+      imgBaseUrl: 'https://fuss10.elemecdn.com'
+    }
+ },
+  watch:{
+    categorys(value){
+      this.$nextTick(()=>{
+        new Swiper('.swiper-container',{
+          pagination:{
+            el:'.swiper-pagination'
+          },
+          loop:true
+        })
+      })
+    }
   }
+
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
