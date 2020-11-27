@@ -21,6 +21,11 @@ export const reqSendCode = phone => ajax('/api/sendcode', {phone})
  */
 export const reqSmsLogin = (phone, code) => ajax('/api/login_sms', {phone, code}, 'POST')
 /**
+ * 账号密码证码登录
+ */
+export const reqPwdLogin = ({name,pwd,captcha}) => ajax('/api/login_pwd', {name,pwd,captcha}, 'POST')
+
+/**
  * 获取用户信息(根据会话)
  */
 export const reqUser = () => ajax('/api/userinfo')

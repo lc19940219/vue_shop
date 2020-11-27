@@ -1,12 +1,15 @@
 <template>
    <div class="msite">
           <!--首页头部-->
-          <HeaderTop title="aaaaaxx">
+          <HeaderTop :title="address.name">
             <router-link class="header_search" slot="search" to="/search">
               <i class="iconfont icon-sousuo"></i>
             </router-link>
-            <router-link class="header_login" slot="login" to="/login">
-              <span class="header_login_text">登录|注册</span>
+            <router-link class="header_login" slot="login" :to="userInfo._id ? '/userinfo':'/login'">
+              <span class="header_login_text" v-if="!userInfo._id" >登录|注册</span>
+              <span class="header_login_text" v-else >
+                <i class="iconfont icon-person"/>
+              </span>
             </router-link>
           </HeaderTop>
           <!--首页导航-->
@@ -59,7 +62,7 @@ export default {
     ShopList
   },
   computed: {
-    ...mapState(['address', 'categorys']),
+    ...mapState(['address', 'categorys','userInfo']),
 
     categorysArr() {
       const max = 8

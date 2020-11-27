@@ -2,19 +2,25 @@
   <div id="app">
 
     <router-view/>
-<FootGuider v-show="$route.meta.showFooter"></FootGuider>
+    <FootGuider v-show="$route.meta.showFooter"></FootGuider>
   </div>
 </template>
 
 <script>
-  import FootGuider from './components/FooterGuider/FootGuider.vue'
+import FootGuider from './components/FooterGuider/FootGuider.vue'
+import {mapActions} from 'vuex'
+
 export default {
- components:{
-   FootGuider
- },
-created() {
-   this.$store.dispatch("getAddress")
-}
+  components: {
+    FootGuider
+  },
+  mounted() {
+    this.getAddress()
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(["getAddress", "getUserInfo"])
+  }
 }
 </script>
 

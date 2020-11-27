@@ -20,12 +20,10 @@ export default {
     const result = await reqShops({latitude, longitude})
     commit(RECEIVE_SHOPS, {shops: result.data})
   },
-  // recorduserInfo({commit}, userInfo) {
-  //
-  //
-  //   commit(RECEIVE_USER_INFO, {userInfo})
-  // },
-  async getuserInfo({commit}) {
+  recorduserInfo({commit}, userInfo) {
+    commit(RECEIVE_USER_INFO, {userInfo})
+  },
+  async getUserInfo({commit}) {
     const result = await reqUser()
     commit(RECEIVE_USER_INFO, {userInfo: result.data})
   },

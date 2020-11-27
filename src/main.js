@@ -6,11 +6,14 @@ import router from './router'
 
 Vue.config.productionTip = false
 import store from './store/index'
+import {Button} from 'mint-ui'
+
+Vue.component(Button.name, Button)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>',
   store
 })
