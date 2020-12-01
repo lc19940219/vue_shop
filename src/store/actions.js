@@ -1,5 +1,23 @@
-import {RECEIVE_ADDRESS, RECEIVE_CATEGORYS, RECEIVE_SHOPS, RECEIVE_USER_INFO, RESET_USER_INFO} from './mutations-type'
-import {reqAddress, reqCategorys, reqLogout, reqShops, reqUser} from '../api/index'
+import {
+  RECEIVE_ADDRESS,
+  RECEIVE_CATEGORYS,
+  RECEIVE_SHOPS,
+  RECEIVE_USER_INFO,
+  RESET_USER_INFO,
+  RECEIVE_GOODS,
+  RECEIVE_RATINGS,
+  RECEIVE_INFO
+} from './mutations-type'
+import {
+  reqAddress,
+  reqCategorys,
+  reqLogout,
+  reqShopGoods,
+  reqShopInfo,
+  reqShopRatings,
+  reqShops,
+  reqUser
+} from '../api/index'
 
 export default {
 
@@ -37,6 +55,33 @@ export default {
     if (result.code === 0) {
       commit(RESET_USER_INFO)
     }
+  },
 
+  // 异步获取商家信息
+  async getShopInfo({commit},callback) {
+    const result = await reqShopInfo()
+    if (result.code === 0) {
+      const shopinfo = result.data
+      commit(RECEIVE_INFO, {shopinfo})
+      callback && callback()
+    }
+  },
+  // 异步获取商家评价列表
+  async getShopRatings({commit},callback) {
+    const result = await reqShopRatings()
+    if (result.code === 0) {
+      const shopratings = result.data
+      commit(RECEIVE_RATINGS, {shopratings})
+      callback && callback()
+    }
+  },
+  // 异步获取商家商品列表
+  async getShopGoods({commit},callback) {
+    const result = await reqShopGoods()
+    if (result.code === 0) {
+      const shopgoods = result.data
+      commit(RECEIVE_GOODS, {shopgoods})
+      callback && callback()
+    }
   },
 }

@@ -64,4 +64,5 @@ export default {
           height 2px
           transform translateX(-50%)
           background #02a774
+
 </style >

@@ -23,7 +23,7 @@ export const reqSmsLogin = (phone, code) => ajax('/api/login_sms', {phone, code}
 /**
  * 账号密码证码登录
  */
-export const reqPwdLogin = ({name,pwd,captcha}) => ajax('/api/login_pwd', {name,pwd,captcha}, 'POST')
+export const reqPwdLogin = ({name, pwd, captcha}) => ajax('/api/login_pwd', {name, pwd, captcha}, 'POST')
 
 /**
  * 获取用户信息(根据会话)
@@ -33,3 +33,13 @@ export const reqUser = () => ajax('/api/userinfo')
  * 请求登出
  */
 export const reqLogout = () => ajax('/api/logout')
+
+/*** 获取商家信息
+ *
+ */
+export const reqShopInfo = () => ajax('/shop_info')
+/*** 获取商家评价数组 */
+export const reqShopRatings = () => ajax('/shop_ratings')
+/*** 获取商家商品数组 */
+export const reqShopGoods = () => ajax('/shop_goods')
+
