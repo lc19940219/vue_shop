@@ -23,10 +23,15 @@ export default {
   recorduserInfo({commit}, userInfo) {
     commit(RECEIVE_USER_INFO, {userInfo})
   },
+  // 异步获取用户信息
   async getUserInfo({commit}) {
-    const result = await reqUser()
-    commit(RECEIVE_USER_INFO, {userInfo: result.data})
+    const result = await reqUserInfo()
+    if (result.code === 0) {
+      const userInfo = result.data
+      commit(RECEIVE_USER_INFO, {userInfo})
+    }
   },
+
   async logout({commit}) {
     const result = await reqLogout()
     if (result.code === 0) {
