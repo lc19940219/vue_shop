@@ -24,11 +24,14 @@
 </template>
 
 <script>
-import ShopHeader from "./ShopGoods/ShopHeader";
+import ShopHeader from "../../components/ShopHeader/ShopHeader";
 
 export default {
   components: {
     ShopHeader
+  },
+  mounted() {
+    this.$store.dispatch("getShopInfo")
   }
 }
 </script>
@@ -65,4 +68,4 @@ export default {
           transform translateX(-50%)
           background #02a774
 
-</style >
+</style>
