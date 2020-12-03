@@ -3,6 +3,7 @@
     <ShopHeader></ShopHeader>
     <div class="tab">
       <div class="tab-item">
+
         <router-link to="/shop/goods" replace>
           点餐
         </router-link>
@@ -18,13 +19,16 @@
         </router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
 
   </div>
 </template>
 
 <script>
 import ShopHeader from "../../components/ShopHeader/ShopHeader";
+
 export default {
   components: {
     ShopHeader,
