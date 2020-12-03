@@ -93,5 +93,7 @@ export default {
     } else {
       commit(DECREMENT_FOOD_COUNT, {food})
     }
-  }
+  },
+
+
 }
