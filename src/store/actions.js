@@ -18,7 +18,8 @@ import {
   reqShopInfo,
   reqShopRatings,
   reqShops,
-  reqUser
+  reqUserInfo,
+
 } from '../api/index'
 
 export default {

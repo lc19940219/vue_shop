@@ -18,7 +18,8 @@
           <li class="food-list-hook food-list" v-for="(good,index) in goods" :key="index">
             <h1 class="title">{{ good.name }}</h1>
             <ul>
-              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index">
+              <li class="food-item bottom-border-1px" v-for="(food,index) in good.foods" :key="index"
+                  @click="showFood(food)">
                 <div class="icon">
                   <img width="57" height="57"
                        :src="food.icon">
@@ -44,7 +45,9 @@
 
         </ul>
       </div>
+      <ShopCart/>
     </div>
+    <Food :food="food" ref="food"/>
   </div>
 </template>
 
@@ -52,6 +55,8 @@
 import {mapState} from 'vuex'
 import BScroll from 'better-scroll'
 import CartControl from "../../../components/CartControl/CartControl";
+import ShopCart from "../../../components/ShopCart/ShopCart";
+import Food from "../../../components/Food/Food";
 
 export default {
   data() {
@@ -121,10 +126,16 @@ export default {
       const scrollY = this.tops[index]
       this.scrollY = scrollY
       this.foodScroll.scrollTo(0, -scrollY, 300)
+    },
+    showFood(food) {
+      this.food = food
+      this.$refs.food.toggleShow()
     }
   },
   components: {
-    CartControl
+    CartControl,
+    ShopCart,
+    Food
   }
 }
 </script>
