@@ -9,7 +9,8 @@ import {
   RECEIVE_INFO,
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
-  CLEAR_CART
+  CLEAR_CART,
+  RECEIVE_SEARCHSHOP
 
 } from './mutations-type'
 import Vue from 'vue'
@@ -67,5 +68,9 @@ export default {
 
     state.cartFoods.forEach((food, index) => food.count = 0)
     state.cartFoods = []
-  }
+  },
+  [RECEIVE_SEARCHSHOP](state, {shops}) {
+
+    state.searchShops = shops
+  },
 }

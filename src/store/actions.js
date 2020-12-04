@@ -9,12 +9,13 @@ import {
   RECEIVE_INFO,
   INCREMENT_FOOD_COUNT,
   DECREMENT_FOOD_COUNT,
-  CLEAR_CART
+  CLEAR_CART,
+  RECEIVE_SEARCHSHOP
 } from './mutations-type'
 import {
   reqAddress,
   reqCategorys,
-  reqLogout,
+  reqLogout, reqSearchShop,
   reqShopGoods,
   reqShopInfo,
   reqShopRatings,
@@ -97,6 +98,12 @@ export default {
   },
   clearCart({commit}) {
     commit(CLEAR_CART )
-  }
+  },
+  async getSearchShops({commit, state},keyword) {
+    const geohash = state.latitude + "," + state.longitude
+
+    const result = await reqSearchShop(geohash,keyword)
+    commit(RECEIVE_SEARCHSHOP, {shops: result.data})
+  },
 
 }

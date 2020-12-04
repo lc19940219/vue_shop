@@ -9,7 +9,11 @@ Vue.config.productionTip = false
 import store from './store/index'
 import {Button} from 'mint-ui'
 import './mock/mockService' // 加载mockServer即可
-
+import VueLazyload from 'vue-lazyload'
+import loading from './common/imgs/loading.gif'
+Vue.use(VueLazyload, {
+  loading
+})
 Vue.component(Button.name, Button)
 /* eslint-disable no-new */
 new Vue({

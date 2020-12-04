@@ -44,3 +44,6 @@ export const reqShopRatings = () => ajax('/ratings')
 /*** 获取商家商品数组 */
 export const reqShopGoods = () => ajax('/goods')
 
+// 4、根据经纬度和关键字搜索商铺列表
+export const reqSearchShop = (geohash, keyword) => ajax( '/api/search_shops', {geohash, keyword})
+

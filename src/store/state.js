@@ -9,7 +9,9 @@ export default {
   goods: [],
   info: {},
   ratings: [],
-  cartFoods:[]
+  cartFoods:[],
+  searchShops: [], // 搜索得到的商家列表
+
 
 
 }
